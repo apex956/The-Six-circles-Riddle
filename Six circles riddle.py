@@ -6,8 +6,8 @@ Remove 6 of the items so that the number of remaining items on every row, column
 How many ways are there to select 6 items out of 16? The answer is "16 choose 6" which is 8008
 So the code has to run over all 8008 combinations and for each one check all the conditions
 detailed in the riddle (10 conditions).
-Use an array from 0 to 15. Initially assign the value 1 to all the array elements.
-For each of the 6 selected elements assign the value zero.
+Use an array of 16 elements. Initially assign the value 1 to all the array elements.
+For each of the 6 selected elements (the removed circles) assign the value zero.
 For each of the 8008 arrays, go over the 10 combinations (corresponding to rows, columns, diagonals)
 add up the values of the four elements and select those arrays where all 10 results are an even number.
 """
@@ -25,7 +25,7 @@ def check_if_even(num):
 
 
 def check_for_even_number(items):
-    """ Test if the number of circles (items) that are left  in all the rows, columns and major diagonals is even.
+    """ Test if the number of circles (items) that are left in all the rows, columns and major diagonals is even.
         If a circle is in place, the value is 1, otherwise it is 0 """
 
     # check the rows
@@ -44,13 +44,13 @@ def check_for_even_number(items):
     if check_if_even(sum1) is False or check_if_even(sum2) is False or \
             check_if_even(sum3) is False or check_if_even(sum4) is False:
         return False
-
     # check the two major diagonals
     sum1 = items[0] + items[5] + items[10] + items[15]
     sum2 = items[3] + items[6] + items[9] + items[12]
     if check_if_even(sum1) is False or check_if_even(sum2) is False:
         return False
     return True
+
 
 # 16 choose 6
 array_of_zeros_combo = np.array(list(combinations(range(16), 6)))
